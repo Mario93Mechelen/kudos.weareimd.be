@@ -13,6 +13,8 @@ use Faker\Generator as Faker;
 |
 */
 
+
+
 $factory->define(App\User::class, function (Faker $faker) {
     static $password;
 
@@ -20,6 +22,20 @@ $factory->define(App\User::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
+        'avatar' => $faker->imageUrl($width = 640, $height = 480), // 'http://lorempixel.com/640/480/'
+        'avatar_original' => $faker->imageUrl($width = 640, $height = 480), // 'http://lorempixel.com/640/480/'
+        'gender' => $faker->randomDigit,
+        'token' => $faker->randomDigit,
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Compliment::class, function (Faker $faker) {
+    static $password;
+
+    return [
+        'sender_id' => $faker->randomDigit,
+        'receiver_id' => $faker->randomDigit,
+        'body' => $faker->realText(50),
     ];
 });

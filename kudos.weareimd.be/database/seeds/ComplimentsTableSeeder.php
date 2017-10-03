@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-class DatabaseSeeder extends Seeder
+
+class ComplimentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -10,7 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ComplimentsTableSeeder::class);
-        $this->Call(UsersTableSeeder::class);
+        factory(App\Compliment::class, 20)->create();
     }
 }

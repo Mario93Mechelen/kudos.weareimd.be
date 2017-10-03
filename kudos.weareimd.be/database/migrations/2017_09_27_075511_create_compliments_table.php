@@ -18,7 +18,7 @@ class CreateComplimentsTable extends Migration
             $table->integer('sender_id');
             $table->integer('receiver_id');
             $table->string('body');
-            //$table->timestamps();
+            $table->timestamps();
         });
     }
 

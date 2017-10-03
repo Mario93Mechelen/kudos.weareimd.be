@@ -2,11 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Compliment;
+use App;
 use Illuminate\Http\Request;
 
 class ComplimentController extends Controller
 {
+
+    public function showReceived()
+    {
+
+        $id=4;
+        $compliments = App\Compliment::all()->where('receiver_id', $id);
+        return view('compliments/received', compact('compliments'));
+
+    }
+
+    public function showGiven()
+    {
+
+        $id=4;
+        $compliments = App\Compliment::all()->where('sender_id', $id);
+        return view('compliments/given', compact('compliments'));
+
+    }
+
     /**
      * Display a listing of the resource.
      *

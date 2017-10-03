@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,18 +20,9 @@ Route::get('/home', function () {
     return view('home/index');
 });
 
-Route::get('/users', function () {
-    return view('users/index');
-});
+Route::get('/users', 'UsersController@index');
 
-Route::get('/users', function () {
-    return view('users/user');
-});
 
-Route::get('/compliments/received', function () {
-    return view('compliments/received');
-});
+Route::get('/compliments/received', 'ComplimentController@showReceived');
 
-Route::get('/compliments/given', function () {
-    return view('compliments/given');
-});
+Route::get('/compliments/given', 'ComplimentController@showGiven');
