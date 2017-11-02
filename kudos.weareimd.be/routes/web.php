@@ -13,19 +13,23 @@
 use App\Http\Controllers;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home/index');
 });
 
 Route::get('/home', function () {
     return view('home/index');
 });
 
-Route::get('/users', 'UsersController@index');
+/*Route::group(['middleware' => 'auth'], function()
+{*/
+    Route::get('/users', 'UsersController@index');
+    Route::get('/users/user/{id}', 'UsersController@showUser');
+    Route::get('/compliments/received', 'ComplimentController@showReceived');
+    Route::get('/compliments/given', 'ComplimentController@showGiven');
 
+    Route::post('/compliments', 'ComplimentController@store');
 
-Route::get('/compliments/received', 'ComplimentController@showReceived');
+//});
 
-Route::get('/compliments/given', 'ComplimentController@showGiven');
-
-Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('login/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('/login/callback', 'Auth\LoginController@handleProviderCallback');

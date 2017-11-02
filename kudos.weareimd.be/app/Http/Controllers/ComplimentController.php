@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use Illuminate\Http\Request;
+use \Auth;
 
 class ComplimentController extends Controller
 {
@@ -55,6 +56,14 @@ class ComplimentController extends Controller
     public function store(Request $request)
     {
         //
+        $user = auth()->user();
+
+        $compliment = new App\Compliment();
+        $compliment->sender_id = $user->id;
+        $compliment->receiver_id = request('receiver');
+        $compliment->body = request('compliment');
+
+        return redirect('/users');
     }
 
     /**

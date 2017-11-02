@@ -64,7 +64,10 @@ class LoginController extends Controller
         $newuser->email = $user->email;
         $newuser->password = 'true';
         $newuser->token = $user->token;
-        return redirect('/users/index');
+
+        auth()->login($newuser);
+        Auth::check();
+        return redirect('/users');
 
         // $user->token;
     }

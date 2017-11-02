@@ -4,8 +4,7 @@
 
     @foreach($users as $user)
 
-        <img src="{{$user->avatar}}" alt="photo">
-        <p>{{$user->name}}</p>
+        <a href="/users/user/{{$user->id}}"><img src="{{$user->avatar}}" alt="photo" class="img-circle"></a>
 
     @endforeach
 
