@@ -2,10 +2,12 @@
 
 @section('content')
 
-    @foreach($compliments as $compliment)
+    <div class="d-flex flex-column flex-wrap justify-content-around">
+        <h1>My Received Compliments</h1>
+        @foreach($compliments as $compliment)
 
-        <p>{{$compliment->body}}</p>
+            <p class="p-2">{{$compliment->body}}</p>
 
-    @endforeach
-
+        @endforeach
+    </div>
 @endsection

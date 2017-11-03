@@ -12,7 +12,8 @@ class ComplimentController extends Controller
     public function showReceived()
     {
 
-        $id=4;
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $id = $user->id;
         $compliments = App\Compliment::all()->where('receiver_id', $id);
         return view('compliments/received', compact('compliments'));
 
@@ -20,8 +21,8 @@ class ComplimentController extends Controller
 
     public function showGiven()
     {
-
-        $id=4;
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $id = $user->id;
         $compliments = App\Compliment::all()->where('sender_id', $id);
         return view('compliments/given', compact('compliments'));
 
