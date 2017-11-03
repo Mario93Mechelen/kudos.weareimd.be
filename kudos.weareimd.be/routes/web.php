@@ -12,16 +12,12 @@
 */
 use App\Http\Controllers;
 
-Route::get('/', function () {
-    return view('home/index');
-});
+Route::get('/', 'Auth\LoginController@index')->name('login');
 
-Route::get('/home', function () {
-    return view('home/index');
-});
+Route::get('/home', 'Auth\LoginController@index')->name('login2');
 
-/*Route::group(['middleware' => 'auth'], function()
-{*/
+Route::group(['middleware' => 'auth'], function()
+{
     Route::get('/users', 'UsersController@index');
     Route::get('/users/user/{id}', 'UsersController@showUser');
     Route::get('/compliments/received', 'ComplimentController@showReceived');
@@ -29,7 +25,8 @@ Route::get('/home', function () {
 
     Route::post('/compliments', 'ComplimentController@store');
 
-//});
+});
 
 Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('/login/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/logout', 'Auth\LoginController@logout');

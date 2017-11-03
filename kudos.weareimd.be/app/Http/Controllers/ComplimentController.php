@@ -56,12 +56,13 @@ class ComplimentController extends Controller
     public function store(Request $request)
     {
         //
-        $user = auth()->user();
+        $user = \Illuminate\Support\Facades\Auth::user();
 
         $compliment = new App\Compliment();
         $compliment->sender_id = $user->id;
         $compliment->receiver_id = request('receiver');
         $compliment->body = request('compliment');
+        $compliment->save();
 
         return redirect('/users');
     }

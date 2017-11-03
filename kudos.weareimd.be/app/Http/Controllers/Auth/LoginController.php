@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 
@@ -38,6 +39,12 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function index()
+    {
+        return view('home/index');
+    }
+
     /**
      * Redirect the user to the GitHub authentication page.
      *
@@ -55,20 +62,31 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('facebook')->user();
-        $newuser = new User;
-        $newuser->name = $user->name;
-        $newuser->avatar = $user->avatar;
-        $newuser->avatar_original = $user->avatar;
-        $newuser->gender = $user->user['gender'];
-        $newuser->email = $user->email;
-        $newuser->password = 'true';
-        $newuser->token = $user->token;
+        $fbUser = Socialite::driver('facebook')->user();
+        $user = User::all()->where('email', $fbUser->email)->first();
+        if ( $user === null) {
+            $user = new User;
+            $user->name = $fbUser->name;
+            $user->avatar = $fbUser->avatar;
+            $user->avatar_original = $fbUser->avatar;
+            $user->gender = $fbUser->user['gender'];
+            $user->email = $fbUser->email;
+            $user->password = 'true';
+            $user->token = $fbUser->token;
+        }
+        Auth::login($user, true);
 
-        auth()->login($newuser);
-        Auth::check();
+        $check = Auth::check();
+
         return redirect('/users');
-
         // $user->token;
+    }
+
+    public function logout()
+    {
+
+        Auth::logout();
+
+        return redirect('/');
     }
 }
