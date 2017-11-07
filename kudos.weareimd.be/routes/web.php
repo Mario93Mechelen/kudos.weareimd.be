@@ -14,11 +14,10 @@ use App\Http\Controllers;
 
 Route::get('/', 'Auth\LoginController@index')->name('login');
 
-Route::get('/home', 'Auth\LoginController@index')->name('login2');
-
 Route::group(['middleware' => 'auth'], function()
 {
     Route::get('/users', 'UsersController@index');
+    Route::get('/home', 'UsersController@home');
     Route::get('/users/user/{id}', 'UsersController@showUser');
     Route::get('/compliments/received', 'ComplimentController@showReceived');
     Route::get('/compliments/given', 'ComplimentController@showGiven');

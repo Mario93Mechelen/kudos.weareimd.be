@@ -3528,8 +3528,6 @@ tbody.collapse.show {
 
 .nav-tabs .nav-item {
   margin-bottom: -1px;
-  padding-left:50px;
-  width:150px;
 }
 
 .nav-tabs .nav-link {
@@ -3635,8 +3633,8 @@ tbody.collapse.show {
 .navbar-nav {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
-      flex-direction: row;
+  -ms-flex-direction: column;
+      flex-direction: column;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
@@ -7066,7 +7064,6 @@ a.bg-dark:focus, a.bg-dark:hover {
 
 .p-2 {
   padding: 0.5rem !important;
-  flex-basis:25%;
 }
 
 .pt-2,
@@ -8375,13 +8372,46 @@ a.text-dark:focus, a.text-dark:hover {
   visibility: hidden !important;
 }
 /*# sourceMappingURL=bootstrap.css.map */
-.images
+.flexbox
 {
-  width:25vw;
-  height:25vw;
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content: space-around;
+  width:80%;
+  margin:auto;
+  margin-top:50px;
+}
+.cell
+{
+  max-width:150px;
+  overflow:hidden;
+  padding:20px;
+}
+.cell img
+{
+  border-radius:100%;
+  width:80%;
+  height:80%;
+  margin-left:10%;
+}
+.cell p
+{
+  text-align:center;
 }
 
-nav li a
+.usercontainer
 {
-  width:200px;
+  display: flex;
+  flex-direction:column;
+  flex-wrap: wrap;
+  width:80%;
+  margin:auto;
+  align-items: center;
+  margin-top:100px;
+}
+
+.usercontainer img
+{
+  margin:auto;
 }

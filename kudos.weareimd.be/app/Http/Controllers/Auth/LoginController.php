@@ -63,9 +63,8 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $fbUser = Socialite::driver('facebook')->user();
-        $user = User::all()->where('email', $fbUser->email)->first();
-        if ( $user === null) {
-            $user = new User;
+        $user = User::firstOrNew(['email' => $fbUser->user['email']]);
+
             $user->name = $fbUser->name;
             $user->avatar = $fbUser->avatar;
             $user->avatar_original = $fbUser->avatar;
@@ -73,12 +72,12 @@ class LoginController extends Controller
             $user->email = $fbUser->email;
             $user->password = 'true';
             $user->token = $fbUser->token;
-        }
+
         Auth::login($user, true);
 
         $check = Auth::check();
 
-        return redirect('/users');
+        return redirect('/home');
         // $user->token;
     }
 

@@ -1,10 +1,11 @@
 @extends('master')
 
 @section('content')
-<div class="d-flex flex-row flex-wrap justify-content-around">
+<div class="flexbox">
     @foreach($users as $user)
-    <div class="p-2">
+    <div class="cell">
         <a href="/users/user/{{$user->id}}"><img src="{{$user->avatar}}" alt="photo" class="img-circle images"></a>
+        <p>{{$user->name}}</p>
     </div>
     @endforeach
 </div>
